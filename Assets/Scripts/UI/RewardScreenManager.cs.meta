@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 889e30827d3de8847b0caf6a2d04eb83
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - rewardUI: {instanceID: 0}
+  - restartUI: {fileID: 6791571272867747119, guid: 47865e4d0d1669541a3aa2992225a687, type: 3}
+  - restartUITitle: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
