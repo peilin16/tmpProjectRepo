@@ -19,15 +19,15 @@ public class SplitterModifier : ModifierSpell
         return spell;
     }
     
-    public override IEnumerator CastWithCoroutine(Spell spell, Vector3 where, Vector3 target)
+    public override IEnumerator CastWithCoroutine(Spell spell)
     {
-        Vector3 direction = (target - where).normalized;
+        Vector3 direction = (spell.target - spell.where).normalized;
 
         Vector3 rotatedLeft = Quaternion.Euler(0, 0, angle) * direction;
         Vector3 rotatedRight = Quaternion.Euler(0, 0, -angle) * direction;
 
-        yield return spell.Cast(where, where + rotatedLeft, spell.team);
-        yield return spell.Cast(where, where + rotatedRight, spell.team);
+        yield return spell.Cast(spell.where, spell.where + rotatedLeft, spell.team, false);
+        yield return spell.Cast(spell.where, spell.where + rotatedRight, spell.team, false);
     }
 
 

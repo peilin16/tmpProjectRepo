@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
         mouseWorld.z = 0;
         StartCoroutine(spellcaster.Cast(transform.position, mouseWorld, currentSpellIndex));
-        StartCoroutine(spellcaster.modifierCast(transform.position, mouseWorld, currentSpellIndex));
+        //StartCoroutine(spellcaster.modifierCast(transform.position, mouseWorld, currentSpellIndex));
 
 
     }

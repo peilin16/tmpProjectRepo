@@ -10,14 +10,26 @@ public class ArcaneSpraySpell : Spell
 
     }
 
-    public override IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
+    public override IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team, bool isModified = true)
     {
         this.team = team;
 
         // Recalculate final values (base + modifiers)
         //calculateFinalData();
-        if (this.is_applicated == false)
+        if (this.is_applicated == false &&isModified)
             applicateModify();
+
+        if (isModified)
+        {
+            int i = 0;
+            foreach (var modifier in modifierSpells)
+            {
+                modifier.Cast(this);
+                CoroutineManager.Instance.StartManagedCoroutine("Player_spell", modifier.name + i, modifier.CastWithCoroutine(this));
+                i += 1;
+
+            }
+        }
         Vector3 direction = (target - where).normalized;
 
         int count = data.N_value;

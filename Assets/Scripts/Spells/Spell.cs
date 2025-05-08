@@ -14,12 +14,19 @@ public class Spell
 
     protected bool is_applicated = false;
     public int final_mana_cost;
+
+    public Vector3 where;
+    public Vector3 target;
     public int final_damage;
     public float final_cooldown;
     public int final_secondary_damage;
     public float final_speed;
     public string final_trajectory;
     public float final_life_time;
+    public bool castModified = true;
+    public bool onHitModified = true;
+
+
     public Spell(SpellCaster owner, SpellData data)
     {
         this.owner = owner;
@@ -81,17 +88,26 @@ public class Spell
         foreach (var modifier in modifierSpells)
             modifier.Application(this);
     }
-    public virtual IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
+    public virtual IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team, bool isModified = true)
     {
 
         this.team = team;
-        if (this.is_applicated == false)
+        if (this.is_applicated == false && isModified)
             applicateModify();
-        foreach (var modifier in modifierSpells)
+       
+        if (isModified)
         {
-            modifier.Cast(this);
+            int i = 0;
+            foreach (var modifier in modifierSpells)
+            {
+                modifier.Cast(this);
+                CoroutineManager.Instance.StartManagedCoroutine("Player_spell", modifier.name + i, modifier.CastWithCoroutine(this));
+                i += 1;
+
+            }
         }
-            
+        
+           
         int spriteIndex = int.Parse(data.projectile.sprite);
         float speed = this.final_speed;
         string traj = this.final_trajectory;
@@ -110,9 +126,21 @@ public class Spell
         yield return new WaitForEndOfFrame();
     }
 
-    void OnHit(Hittable other, Vector3 impact)
+
+
+    public void OnHit(Hittable other, Vector3 impact)
     {
-        
+        if (onHitModified)
+        {
+            int i = 0;
+            foreach (var modifier in modifierSpells)
+            {
+                modifier.Cast(this);
+                CoroutineManager.Instance.StartManagedCoroutine("Player_spell", modifier.name + i, modifier.OnHitWithCoroutine(this));
+                i += 1;
+
+            }
+        }
         if (other.team != team)
         {
             // Defaulting to arcane damage type, but can be extended to use data.damage.type
@@ -145,5 +173,7 @@ public class Spell
                 );
             }
         }
+
+
     }
 }

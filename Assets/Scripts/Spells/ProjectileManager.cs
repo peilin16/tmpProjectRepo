@@ -46,6 +46,11 @@ public class ProjectileManager : MonoBehaviour
         {
             return new SpiralingProjectileMovement(speed);
         }
+        if (name == "wave")
+        {
+            return new WaveProjectileMovement(speed);
+        }
+
         return null;
     }
 

@@ -40,6 +40,15 @@
        "cooldown": "0.5",
        "projectile": {"trajectory": "straight", "speed": "8", "sprite": 0, "lifetime": "0.1 power 100 / +"}
    },
+   "arcane_wave_bolt":  {
+       "name": "Arcane Wave Bolt",
+        "description": "A straight-Wave bolt.",
+       "icon": 0,
+       "damage": {"amount": "25 power 10 / +", "type": "arcane"},
+       "mana_cost": "14",
+       "cooldown": "2",
+       "projectile": {"trajectory": "wave", "speed": "2.3", "sprite": 0}
+   },
    "damage_amp": {
        "name": "damage-amplified",
        "description": "Increased damage and increased mana cost.",
@@ -51,6 +60,20 @@
        "description": "Faster projectile speed",
        "speed_multiplier": "1.75"
    },
+
+   "mana_amp": {
+       "name": "mana-amplified",
+       "description": "Reduce mana cost.",
+       "mana_multiplier": "0.7"
+   },
+   "waver": {
+       "name": "waver",
+       "description": "A straight-wave bolt.",
+       "damage_multiplier": "2",
+       "mana_adder": "7",
+       "projectile_trajectory": "wave"
+   },
+
    "doubler": {
        "name": "doubled",
        "description": "Spell is cast a second time after a small delay; increased mana cost and cooldown.",
@@ -77,5 +100,5 @@
        "mana_adder": "10",
        "projectile_trajectory": "homing"
    }
-
+   
 }

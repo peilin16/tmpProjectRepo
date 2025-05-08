@@ -23,10 +23,13 @@ public class DoublerModifier : ModifierSpell
         return spell;
     }
 
-    public override IEnumerator CastWithCoroutine(Spell spell, Vector3 where, Vector3 target)
+
+
+    public override IEnumerator CastWithCoroutine(Spell spell)
     {
         yield return new WaitForSeconds(delay);
-        yield return spell.Cast(where, target, spell.team);
+ 
+        yield return spell.Cast(spell.where, spell.target, spell.team,false);
     }
     
 }

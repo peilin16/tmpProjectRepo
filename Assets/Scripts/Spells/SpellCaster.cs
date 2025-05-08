@@ -44,7 +44,7 @@ public class SpellCaster
 
         
         spells = new List<Spell>();
-        //spells.Add(builder.Build(this, "arcane_bolt"));
+        //spells.Add(builder.Build(this, "arcane_wave_bolt"));
         spells.Add(builder.MakeRandomSpell(this));
         //spells[0].applicateModify();
 
@@ -56,11 +56,13 @@ public class SpellCaster
 
 
     }
-    public IEnumerator Cast(Vector3 where, Vector3 target, int spellIndex = 0)
+    public IEnumerator Cast(Vector3 where, Vector3 target, int spellIndex = 0, bool isModified = true)
     {
         this.current_where = where;
         this.current_target = target;
         Spell spell = spells[spellIndex];
+        spell.where = where;
+        spell.target = target;
         if (mana >= spell.GetManaCost() && spell.IsReady())
         {
             mana -= spell.GetManaCost();
@@ -68,7 +70,7 @@ public class SpellCaster
         }
         yield break;
     }
-    public IEnumerator modifierCast(Vector3 where, Vector3 target, int spellIndex = 0)
+    /*public IEnumerator modifierCast(Vector3 where, Vector3 target, int spellIndex = 0)
     {
         Spell spell = spells[spellIndex];
         foreach (var modifier in spell.modifierSpells)
@@ -77,7 +79,7 @@ public class SpellCaster
             yield return modifier.CastWithCoroutine(spell, where, target);
             
         }
-    }
+    }*/
    
     /*
     public IEnumerator Cast(Vector3 where, Vector3 target)

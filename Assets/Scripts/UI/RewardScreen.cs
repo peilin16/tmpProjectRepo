@@ -1,11 +1,18 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+
 public class RewardScreen : MonoBehaviour
 {
     public PlayerController player;
-    public SpellUI spellui;
-    
-    public TextMeshProUGUI SpellImfomation;
+    public SpellUI spellui1;
+    public SpellUI spellui2;
+    public SpellUI spellui3;
+
+    public TextMeshProUGUI SpellImfomation1;
+    public TextMeshProUGUI SpellImfomation2;
+    public TextMeshProUGUI SpellImfomation3;
+    private List<Spell> generatedSpells = new List<Spell>();
     private Spell generatedSpell;
     public SpellUIContainer playerSpellUIs;
 
@@ -20,20 +27,28 @@ public class RewardScreen : MonoBehaviour
 
     }
 
+
     public void ShowSpellReward()
     {
-        generatedSpell = player.spellcaster.builder.MakeRandomSpell(player.spellcaster);
-        spellui.SetSpell(generatedSpell);
+        generatedSpells.Clear();
 
-        if (generatedSpell != null)
+        Spell[] uiSpells = new Spell[3];
+        TextMeshProUGUI[] infoFields = { SpellImfomation1, SpellImfomation2, SpellImfomation3 };
+        SpellUI[] spellUIs = { spellui1, spellui2, spellui3 };
+
+        for (int i = 0; i < 3; i++)
         {
+            Spell spell = player.spellcaster.builder.MakeRandomSpell(player.spellcaster);
+            generatedSpells.Add(spell);
+            spellUIs[i].GetComponent<SpellUI>().SetSpell(spell);
+
             string modText = "";
-            int modCount = generatedSpell.modifierSpells.Count;
+            int modCount = spell.modifierSpells.Count;
 
             if (modCount > 0)
             {
                 modText += $"\n<b>Modifiers:</b> {modCount}\n";
-                foreach (var mod in generatedSpell.modifierSpells)
+                foreach (var mod in spell.modifierSpells)
                 {
                     modText += $"- {mod.name}\n";
                 }
@@ -43,36 +58,40 @@ public class RewardScreen : MonoBehaviour
                 modText += "\n<b>Modifiers:</b> None";
             }
 
-            SpellImfomation.text =
-                $"<b>{generatedSpell.GetName()}</b>\n" +
-                $"<i>{generatedSpell.GetDescription()}</i>\n\n" +
-                $"<b>Damage:</b> {generatedSpell.GetDamage()}\n" +
-                $"<b>Mana Cost:</b> {generatedSpell.GetManaCost()}\n" +
-                $"<b>Cooldown:</b> {generatedSpell.GetCooldown():0.00}s" +
+            infoFields[i].text =
+                $"<b>{spell.GetName()}</b>\n" +
+                $"{spell.GetDescription()}\n\n" +
+                $"<b>Damage:</b> {spell.GetDamage()}\n" +
+                $"<b>Mana Cost:</b> {spell.GetManaCost()}\n" +
+                $"<b>Cooldown:</b> {spell.GetCooldown():0.00}s" +
                 modText;
         }
     }
 
-    public void acceptSpell()
+    public void acceptSpell(int index)
     {
-        if (generatedSpell == null)
+        if (index < 0 || index >= generatedSpells.Count)
         {
-            Debug.LogWarning("No generated spell to accept!");
+            Debug.LogWarning("Invalid spell index selected.");
             return;
         }
 
-        player.spellcaster.spells.Add(generatedSpell);
+        //Spell selectedSpell = generatedSpells[index];
+        player.spellcaster.spells.Add(generatedSpells[index]);
 
+        playerSpellUIs.spellUIs[player.spellNum].SetActive(true);
+        playerSpellUIs.spellUIs[player.spellNum].GetComponent<SpellUI>().SetSpell(generatedSpells[index]);
+        
         player.spellNum += 1;
-        playerSpellUIs.spellUIs[player.spellNum - 1].SetActive(true);
-        playerSpellUIs.spellUIs[player.spellNum - 1].GetComponent<SpellUI>().SetSpell(this.generatedSpell);
 
-        spellui.SetSpell(null); // clear UI
-        generatedSpell = null;
+        spellui1.SetSpell(null);
+        spellui2.SetSpell(null);
+        spellui3.SetSpell(null);
+        generatedSpells.Clear();
 
-        // Hide reward screen and move to next wave
-       // GameManager.Instance.NextWave();
+        // GameManager.Instance.NextWave(); // Uncomment if wave advancing is handled here
     }
+
 
 
 

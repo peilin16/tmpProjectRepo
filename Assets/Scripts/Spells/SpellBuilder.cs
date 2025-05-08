@@ -70,45 +70,70 @@ public class SpellBuilder
 
             try
             {
-                if (obj["damage_multiplier"] != null && obj["mana_multiplier"] != null)
+                switch (name)
                 {
-                    float dmg = float.Parse(obj["damage_multiplier"].ToString());
-                    float mana = float.Parse(obj["mana_multiplier"].ToString());
-                    modifierSpellDB[pair.Key] = new DamageAmpModifier(dmg, mana) { name = name, description = desc };
-                }
-                else if (obj["speed_multiplier"] != null)
-                {
-                    float speed = float.Parse(obj["speed_multiplier"].ToString());
-                    modifierSpellDB[pair.Key] = new SpeedAmpModifier(speed) { name = name, description = desc };
-                }
-                else if (obj["delay"] != null && obj["mana_multiplier"] != null && obj["cooldown_multiplier"] != null)
-                {
-                    float delay = float.Parse(obj["delay"].ToString());
-                    float mana = float.Parse(obj["mana_multiplier"].ToString());
-                    float cooldown = float.Parse(obj["cooldown_multiplier"].ToString());
-                    modifierSpellDB[pair.Key] = new DoublerModifier(delay, mana, cooldown) { name = name, description = desc };
-                }
-                else if (obj["angle"] != null && obj["mana_multiplier"] != null)
-                {
-                    float angle = float.Parse(obj["angle"].ToString());
-                    float mana = float.Parse(obj["mana_multiplier"].ToString());
-                    modifierSpellDB[pair.Key] = new SplitterModifier(angle, mana) { name = name, description = desc };
-                }
-                else if (obj["damage_multiplier"] != null && obj["projectile_trajectory"]?.ToString() == "spiraling")
-                {
-                    string dmgExpr = obj["damage_multiplier"].ToString();
-                    modifierSpellDB[pair.Key] = new ChaosModifier(dmgExpr) { name = name, description = desc };
-                }
-                else if (obj["damage_multiplier"] != null && obj["mana_adder"] != null && obj["projectile_trajectory"]?.ToString() == "homing")
-                {
-                    float dmg = float.Parse(obj["damage_multiplier"].ToString());
-                    int mana = int.Parse(obj["mana_adder"].ToString());
-                    modifierSpellDB[pair.Key] = new HomingModifier(dmg, mana) { name = name, description = desc };
+                    case "damage-amplified":
+                        modifierSpellDB[pair.Key] = new DamageAmpModifier(
+                            float.Parse(obj["damage_multiplier"].ToString()),
+                            float.Parse(obj["mana_multiplier"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    case "speed-amplified":
+                        modifierSpellDB[pair.Key] = new SpeedAmpModifier(
+                            float.Parse(obj["speed_multiplier"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    case "doubled":
+                        modifierSpellDB[pair.Key] = new DoublerModifier(
+                            float.Parse(obj["delay"].ToString()),
+                            float.Parse(obj["mana_multiplier"].ToString()),
+                            float.Parse(obj["cooldown_multiplier"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    case "split":
+                        modifierSpellDB[pair.Key] = new SplitterModifier(
+                            float.Parse(obj["angle"].ToString()),
+                            float.Parse(obj["mana_multiplier"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    case "chaotic":
+                        modifierSpellDB[pair.Key] = new ChaosModifier(
+                            obj["damage_multiplier"].ToString())
+                        { name = name, description = desc };
+                        break;
+
+                    case "homing":
+                        modifierSpellDB[pair.Key] = new HomingModifier(
+                            float.Parse(obj["damage_multiplier"].ToString()),
+                            int.Parse(obj["mana_adder"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    case "mana-amplified":
+                        modifierSpellDB[pair.Key] = new ManaAmpModifier(
+                            float.Parse(obj["mana_multiplier"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    case "waver":
+                        modifierSpellDB[pair.Key] = new WaverModifier(
+                            float.Parse(obj["damage_multiplier"].ToString()),
+                            int.Parse(obj["mana_adder"].ToString()))
+                        { name = name, description = desc };
+                        break;
+
+                    /*default:
+                        Debug.LogWarning($"[LoadModifiedSpells] Unknown modifier name: {name}");
+                        break;*/
                 }
             }
             catch
             {
-                Debug.LogWarning($"Failed to parse modifier spell: {pair.Key}");
+                Debug.LogWarning($"[LoadModifiedSpells] Failed to parse modifier spell: {pair.Key}");
             }
         }
     }
