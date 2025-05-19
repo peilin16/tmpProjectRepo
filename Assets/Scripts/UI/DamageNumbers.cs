@@ -6,7 +6,7 @@ public class DamageNumbers : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        EventBus.Instance.OnDamage += OnDamage;
+        EventBus.Instance.OnPhysicalDamage += OnDamage;
     }
 
     // Update is called once per frame

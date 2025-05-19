@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class Damage 
 {
-    public int amount;
+    public float amount;
     public enum Type
     {
         PHYSICAL, ARCANE, NATURE, FIRE, ICE, DARK, LIGHT
     }
     public Type type;
-    public Damage(int amount, Type type)
+    public Damage(float amount, Type type)
     {
+
         this.amount = amount;
         this.type = type;
     }

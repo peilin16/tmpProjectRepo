@@ -3,7 +3,7 @@ using UnityEngine;
 public class SpellUIContainer : MonoBehaviour
 {
     public GameObject[] spellUIs;
-    public PlayerController player;
+    public PlayerController playercontroller;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -32,31 +32,11 @@ public class SpellUIContainer : MonoBehaviour
     
     public void Update()
     {
-        if (!initialized && player.spellcaster != null && player.spellcaster.spells != null)
+        if (!initialized && playercontroller.player != null)
         {
             initialized = true;
-            spellUIs[0].GetComponent<SpellUI>().SetSpell(player.spellcaster.spells[0]);
-            /*
-                var spellList = player.spellcaster.spells;
-
-                for (int i = 0; i < spellUIs.Length && i < spellList.Count; i++)
-                {
-                    //Debug.Log(i);
-                    if (spellList[i] == null)
-                        break;
-                    spellUIs[i].SetActive(true);
-                    var spellUI = spellUIs[i].GetComponent<SpellUI>();
-                    spellUI.SetSpell(spellList[i]);
-                }
-
-                for (int i = spellList.Count; i < spellUIs.Length; i++)
-                {
-                    if (spellList[i] == null)
-                        break;
-                    spellUIs[i].SetActive(false);
-                }
-
-                initialized = true; // prevent repeat execution*/
+            spellUIs[0].GetComponent<SpellUI>().SetSpell(playercontroller.player.spellcaster.spells[0]);
+           
         }
 
     }
@@ -64,20 +44,20 @@ public class SpellUIContainer : MonoBehaviour
     {
 
         // Safety check
-        if (index < 0 || index >= player.spellcaster.spells.Count) return;
+        if (index < 0 || index >= playercontroller.player.spellcaster.spells.Count) return;
 
-        int count = player.spellcaster.spells.Count;
+        int count = playercontroller.player.spellcaster.spells.Count;
 
         // Shift spells and UIs left from index
         for (int i = index; i < count - 1; i++)
         {
-            player.spellcaster.spells[i] = player.spellcaster.spells[i + 1];
+            playercontroller.player.spellcaster.spells[i] = playercontroller.player.spellcaster.spells[i + 1];
             // Update UI
-            spellUIs[i].GetComponent<SpellUI>().SetSpell(player.spellcaster.spells[i]);
+            spellUIs[i].GetComponent<SpellUI>().SetSpell(playercontroller.player.spellcaster.spells[i]);
         }
 
         // Remove last spell
-        player.spellcaster.spells.RemoveAt(count - 1);
+        playercontroller.player.spellcaster.spells.RemoveAt(count - 1);
 
         // Disable last UI
         spellUIs[count - 1].SetActive(false);

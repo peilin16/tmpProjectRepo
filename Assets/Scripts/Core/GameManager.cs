@@ -16,7 +16,7 @@ public class GameManager
     public GameState state;
     public enum Difficultly {Easy, Medium, Endless}
     public Difficultly level = Difficultly.Easy;
-    public int currentWave = 0;
+    public int currentWave = 1;
     public int maxWaves = 0;
 
     public int countdown;
@@ -24,7 +24,10 @@ public class GameManager
     public static GameManager Instance {  get
         {
             if (theInstance == null)
+            {
                 theInstance = new GameManager();
+                theInstance.relicManager = new RelicManager();
+            }    
             return theInstance;
         }
     }
@@ -36,7 +39,7 @@ public class GameManager
     public EnemySpriteManager enemySpriteManager;
     public PlayerSpriteManager playerSpriteManager;
     public RelicIconManager relicIconManager;
-
+    public RelicManager relicManager;
     
     private List<GameObject> enemies;
     public int enemy_count { get { return enemies.Count; } }
@@ -52,12 +55,15 @@ public class GameManager
     public void RemoveEnemy(GameObject enemy)
     {
         defectCount++;
+        Debug.Log(this.enemy_count);
+        //EventBus.Instance.EnemyDied(enemy);
         enemies.Remove(enemy);
+        Debug.Log(this.enemy_count);
     }
     
     public void DestroyAllEnemies()
     {
-        List<GameObject> enemiesToDestroy = new List<GameObject>(enemies);
+        /*List<GameObject> enemiesToDestroy = new List<GameObject>(enemies);
         foreach (GameObject enemy in enemiesToDestroy)
         {
             if (enemy != null)
@@ -71,7 +77,7 @@ public class GameManager
                 }
             }
         }
-        enemies.Clear();
+        enemies.Clear();*/
     }
 
     public GameObject GetClosestEnemy(Vector3 point)

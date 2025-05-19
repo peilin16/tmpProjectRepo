@@ -80,10 +80,10 @@ public class EnemySpawner : MonoBehaviour
                     
                     easyLevelData = new LevelData{
                         name = levelObj["name"]?.ToString(),
-                        waves = levelObj["waves"]?.ToObject<int>() ?? 0,
+                        waves = levelObj["waves"]?.ToObject<int>() ?? 1,
                         spawns = spawnsList
                     };
-                    GameManager.Instance.maxWaves = levelObj["waves"]?.ToObject<int>() ?? 0;
+                    GameManager.Instance.maxWaves = levelObj["waves"]?.ToObject<int>() ?? 1;
                     // Debug.Log($"successful load {easyLevelData.spawns.Count} enemy");
                     return;
                 }
@@ -137,7 +137,7 @@ public class EnemySpawner : MonoBehaviour
         yield return new WaitWhile(() => GameManager.Instance.enemy_count > 0);
         //Debug.Log("Wave end");
         if (GameManager.Instance.state != GameManager.GameState.GAMEOVER) {
-            Debug.Log("Wave end");
+            Debug.Log("Wave end"+ GameManager.Instance.enemy_count);
             GameManager.Instance.state = GameManager.GameState.WAVEEND;
 
 

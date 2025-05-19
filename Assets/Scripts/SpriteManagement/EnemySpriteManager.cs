@@ -7,7 +7,7 @@ public class EnemySpriteManager : IconManager
     
     public Dictionary<string, EnemySprite> EnemyData { get; private set; }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         GameManager.Instance.enemySpriteManager = this;
         //Debug.Log("Awake1");

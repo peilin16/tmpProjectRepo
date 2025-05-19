@@ -59,6 +59,7 @@ public static class RPNCalculator
 
     public static int CalculateEnemyCount(string rpnExpression, int wave, int baseHp)
     {
+
         try
         {
             var variables = new Dictionary<string, float>
@@ -77,8 +78,9 @@ public static class RPNCalculator
         }
     }
     // New method: evaluate float results with power and wave variables
-    public static float EvaluateFloat(string rpnExpression, int wave, int power)
+    public static float EvaluateFloat(string rpnExpression, int wave, float power)
     {
+        //Debug.Log($"rpnExpression:{rpnExpression} wave: {wave} power: {power})");
         try
         {
             var variables = new Dictionary<string, float>

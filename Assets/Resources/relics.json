@@ -1,57 +1,127 @@
 [
-    {
-        "name": "Green Gem",
-        "sprite": 0,
-        "trigger": {
-            "description": "Whenever you take damage",
-            "type": "take-damage"
-        },
-        "effect": {
-            "description": "you gain 5 mana",
-            "type": "gain-mana",
-            "amount": "5"
-        }
+  {
+    "name": "Green Gem",
+    "sprite": 0,
+    "trigger": {
+      "description": "Whenever you take damage",
+      "type": "take-damage"
     },
-    {
-        "name": "Jade Elephant",
-        "sprite": 1,
-        "trigger": {
-            "description": "When you don't move for 3 seconds",
-            "type": "stand-still",
-            "amount": "3"
-        },
-        "effect": {
-            "description": "you gain 10 spellpower (+5/wave)",
-            "type": "gain-spellpower",
-            "amount": "10 wave 5 * +",
-            "until": "move"
-        }
-    },
-    {
-        "name": "Golden Mask",
-        "sprite": 2,
-        "trigger": {
-            "description": "When you take damage",
-            "type": "take-damage"
-        },
-        "effect": {
-            "description": "your next spell gains 100 additional spellpower.",
-            "type": "gain-spellpower",
-            "amount": "100",
-            "until": "cast-spell"
-        }
-    },
-    {
-        "name": "Cursed Scroll",
-        "sprite": 3,
-        "trigger": {
-            "description": "When you kill an enemy",
-            "type": "on-kill"
-        },
-        "effect": {
-            "description": "you gain 25 mana.",
-            "type": "gain-mana",
-            "amount": "25"
-        }
+    "effect": {
+      "description": "you gain 5 mana",
+      "type": "gain-mana",
+      "amount": "5"
     }
+  },
+  {
+    "name": "Jade Elephant",
+    "sprite": 1,
+    "trigger": {
+      "description": "When you don't move for 3 seconds",
+      "type": "stand-still",
+      "amount": "3"
+    },
+    "effect": {
+      "description": "you gain 10 spellpower (+5/wave)",
+      "type": "gain-spellpower",
+      "amount": "10 wave 5 * +",
+      "until": "move"
+    }
+  },
+  {
+    "name": "Golden Mask",
+    "sprite": 2,
+    "trigger": {
+      "description": "When you take damage",
+      "type": "take-damage"
+    },
+    "effect": {
+      "description": "your next spell gains 100 additional spellpower.",
+      "type": "gain-spellpower",
+      "amount": "100",
+      "until": "cast-spell"
+    }
+  },
+  {
+    "name": "Cursed Scroll",
+    "sprite": 3,
+    "trigger": {
+      "description": "When you kill an enemy",
+      "type": "on-kill"
+    },
+    "effect": {
+      "description": "you gain 25 mana.",
+      "type": "gain-mana",
+      "amount": "25"
+    }
+  },
+  {
+    "name": "Mysterious Mask",
+    "sprite": 4,
+    "trigger": {
+      "description": "When you kill an enemy",
+      "type": "on-kill"
+    },
+    "effect": {
+      "description": "your speed gain 5 in 3 second",
+      "type": "gain-speed",
+      "amount": "5"
+    }
+  },
+  {
+    "name": "Knight Shield",
+    "sprite": 5,
+
+    "trigger": {
+      "description": "When your healthly lower than 15%",
+      "type": "on-hurt"
+    },
+    "effect": {
+      "description": "Your healthly will gradully increase to 15%, each second increase 0.3%",
+      "type": "gain-healthly",
+      "amount": "0.3"
+    }
+  },
+
+  {
+    "name": "Golden Crown",
+    "sprite": 9,
+    "trigger": {
+      "description": "When you kill an enemy",
+      "type": "on-kill"
+    },
+    "effect": {
+      "description": "your spells s gain 5",
+      "type": "gain-speed",
+      "amount": "5"
+    }
+  },
+  {
+    "name": "Grand Chornicle",
+    "sprite": 10,
+    "trigger": {
+      "description": "When your healthly lower than 25%",
+      "type": "on-hurt"
+    },
+    "effect": {
+      "description": "your spell power gains 50 additional",
+      "type": "gain-spellpower",
+      "amount": "50"
+    }
+  }
+  ,
+  {
+    "name": "Red necklace",
+    "sprite": 6,
+
+    "trigger": {
+      "description": "When your take this relic",
+      "type": "one-time"
+    },
+    "effect": {
+      "description": "Your max healthly will increase",
+      "type": "gain-healthly",
+      "amount": "10 wave 5 * +"
+    }
+  }
+
 ]

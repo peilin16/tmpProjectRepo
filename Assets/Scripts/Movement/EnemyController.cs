@@ -14,7 +14,8 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         target = GameManager.Instance.player.transform;
-        hp.OnDeath += Die;
+        //hp.OnDeath += Die;
+        EventBus.Instance.OnMonsterDeath += (gameObject) => this.Die();
         healthui.SetHealth(hp);
     }
 
@@ -37,18 +38,18 @@ public class EnemyController : MonoBehaviour
         if (last_attack + 2 < Time.time)
         {
             last_attack = Time.time;
-            target.gameObject.GetComponent<PlayerController>().hp.Damage(new Damage(5, Damage.Type.PHYSICAL));
+            target.gameObject.GetComponent<PlayerController>().player.hp.Damage(new Damage(5, Damage.Type.PHYSICAL));
         }
     }
 
 
     public void Die()
     {
-        if (!dead)
+        if (!dead && this.hp.hp <= 0)
         {
             dead = true;
-            GameManager.Instance.RemoveEnemy(gameObject);
-            Destroy(gameObject);
+            GameManager.Instance.RemoveEnemy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

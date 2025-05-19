@@ -200,9 +200,11 @@ public class SpellBuilder
     public Spell BuildSpell(SpellCaster owner, SpellData data)
     {
         int wave = GameManager.Instance.currentWave;
-        int power = 10;
+        
+        float power = owner.spellPower;
 
         data.base_damage = Mathf.FloorToInt(RPNCalculator.EvaluateFloat(data.damage.amount, wave, power));
+
         data.base_mana_cost = Mathf.FloorToInt(RPNCalculator.EvaluateFloat(data.mana_cost, wave, power));
         data.base_cooldown = RPNCalculator.EvaluateFloat(data.cooldown, wave, power);
 
@@ -228,18 +230,8 @@ public class SpellBuilder
 
         if (data.name == "Arcane Spray")
             return new ArcaneSpraySpell(owner, data);
-
+        
         return new Spell(owner, data);
     }
-
-
-
-
-
-
-
-
-
-
-
+    
 }

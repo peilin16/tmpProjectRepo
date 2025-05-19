@@ -15,17 +15,18 @@ public class Spell
     protected bool is_applicated = false;
     public int final_mana_cost;
 
+
     public Vector3 where;
     public Vector3 target;
-    public int final_damage;
+    public float final_damage;
     public float final_cooldown;
-    public int final_secondary_damage;
+    public float final_secondary_damage;
     public float final_speed;
     public string final_trajectory;
     public float final_life_time;
     public bool castModified = true;
     public bool onHitModified = true;
-
+    public float spellPower;
 
     public Spell(SpellCaster owner, SpellData data)
     {
@@ -55,7 +56,7 @@ public class Spell
     {
         return this.final_speed;
     }
-    public int GetDamage()
+    public float GetDamage()
     {
         return this.final_damage;
     }
@@ -74,7 +75,7 @@ public class Spell
         return data.description;
     }
 
-    public int getSecondDamage()
+    public float getSecondDamage()
     {
         return this.final_secondary_damage;
     }
@@ -125,7 +126,10 @@ public class Spell
         
         yield return new WaitForEndOfFrame();
     }
-
+    public void ApplyFlatSpellpowerBoost(int bonus)
+    {
+        final_damage += bonus;
+    }
 
 
     public void OnHit(Hittable other, Vector3 impact)

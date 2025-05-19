@@ -14,16 +14,36 @@ public class Hittable
 
     public void Damage(Damage damage)
     {
-        EventBus.Instance.DoDamage(owner.transform.position, damage, this);
-        hp -= damage.amount;
+        // 触发物理伤害事件（通用）
+        EventBus.Instance.TriggerPhysicalDamage(owner.transform.position, damage, this);
+
+        // 扣血逻辑
+        hp -= (int)Math.Round(damage.amount);
+
+        // 根据队伍触发不同事件
+        switch (team)
+        {
+            case Team.PLAYER:
+                EventBus.Instance.TriggerPlayerDamaged(damage);
+
+                break;
+            case Team.MONSTERS:
+                EventBus.Instance.TriggerOnMonsterDamaged(damage, owner);
+                break;
+        }
+
+        // 死亡检测
         if (hp <= 0)
         {
             hp = 0;
-            OnDeath();
+            if (team == Team.PLAYER)
+                EventBus.Instance.TriggerOnPlayerDeath(owner);
+            else
+                EventBus.Instance.TriggerOnMonsterDeath(owner);
         }
     }
 
-    public event Action OnDeath;
+
 
     public Hittable(int hp, Team team, GameObject owner)
     {

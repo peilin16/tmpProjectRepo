@@ -7,10 +7,10 @@ public class SpellData
     public int icon;
     public string N;
     public DamageData damage;
-    public int base_damage;
+    public float base_damage;
 
     public string secondary_damage;
-    public int base_secondary_damage;
+    public float base_secondary_damage;
 
     public string mana_cost;
     public int base_mana_cost;

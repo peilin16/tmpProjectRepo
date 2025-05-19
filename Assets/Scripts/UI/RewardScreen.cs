@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class RewardScreen : MonoBehaviour
 {
-    public PlayerController player;
+    public PlayerController playerController;
     public SpellUI spellui1;
     public SpellUI spellui2;
     public SpellUI spellui3;
@@ -38,7 +38,7 @@ public class RewardScreen : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            Spell spell = player.spellcaster.builder.MakeRandomSpell(player.spellcaster);
+            Spell spell = playerController.player.spellcaster.builder.MakeRandomSpell(playerController.player.spellcaster);
             generatedSpells.Add(spell);
             spellUIs[i].GetComponent<SpellUI>().SetSpell(spell);
 
@@ -77,12 +77,12 @@ public class RewardScreen : MonoBehaviour
         }
 
         //Spell selectedSpell = generatedSpells[index];
-        player.spellcaster.spells.Add(generatedSpells[index]);
+        playerController.player.spellcaster.spells.Add(generatedSpells[index]);
 
-        playerSpellUIs.spellUIs[player.spellNum].SetActive(true);
-        playerSpellUIs.spellUIs[player.spellNum].GetComponent<SpellUI>().SetSpell(generatedSpells[index]);
-        
-        player.spellNum += 1;
+        playerSpellUIs.spellUIs[playerController.spellNum].SetActive(true);
+        playerSpellUIs.spellUIs[playerController.spellNum].GetComponent<SpellUI>().SetSpell(generatedSpells[index]);
+
+        playerController.spellNum += 1;
 
         spellui1.SetSpell(null);
         spellui2.SetSpell(null);

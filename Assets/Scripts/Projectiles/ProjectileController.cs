@@ -36,7 +36,7 @@ public class ProjectileController : MonoBehaviour
                 var pc = collision.gameObject.GetComponent<PlayerController>();
                 if (pc != null)
                 {
-                    OnHit(pc.hp, transform.position);
+                    OnHit(pc.player.hp, transform.position);
                 }
             }
 
