@@ -90,9 +90,9 @@
       "type": "on-kill"
     },
     "effect": {
-      "description": "your spells s gain 5",
-      "type": "gain-speed",
-      "amount": "5"
+      "description": "your spell power s gain 30 in 3 second",
+      "type": "gain-spell-power",
+      "amount": "30"
     }
   },
   {
@@ -103,9 +103,9 @@
       "type": "on-hurt"
     },
     "effect": {
-      "description": "your spell power gains 50 additional",
+      "description": "your spell power gains 20 additional",
       "type": "gain-spellpower",
-      "amount": "50"
+      "amount": "20"
     }
   }
   ,

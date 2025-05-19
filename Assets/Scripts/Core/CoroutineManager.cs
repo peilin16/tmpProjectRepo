@@ -25,19 +25,25 @@ public class CoroutineManager : MonoBehaviour
     /// <summary>
     /// 启动协程（带 ID 和分组），自动覆盖同 ID
     /// </summary>
-    public void StartManagedCoroutine(string group, string id, IEnumerator routine)
+    public Coroutine StartManagedCoroutine(string group, string id, IEnumerator routine)
     {
+        // 确保分组字典存在
         if (!groupedCoroutines.ContainsKey(group))
+        {
             groupedCoroutines[group] = new Dictionary<string, Coroutine>();
+        }
 
-        // 停止旧协程（如果已存在）
+        // 停止现有协程（如果存在）
         if (groupedCoroutines[group].TryGetValue(id, out var existing))
         {
             StopCoroutine(existing);
+            groupedCoroutines[group].Remove(id);
         }
 
+        // 启动新协程
         Coroutine c = StartCoroutine(WrappedCoroutine(group, id, routine));
-        groupedCoroutines[group][id] = c;
+        groupedCoroutines[group][id] = c; // 现在这个键肯定存在
+        return c;
     }
 
     /// <summary>

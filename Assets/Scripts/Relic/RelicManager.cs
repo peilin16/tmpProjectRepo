@@ -40,6 +40,9 @@ public class RelicManager
                 case "Mysterious Mask":
                     relic = new MysteriousMask();
                     break;
+                case "Knight Shield":
+                    relic = new KnightShield();
+                    break;
                 default:
                     Debug.LogWarning($"Unknown relic: {name}");
                     continue;

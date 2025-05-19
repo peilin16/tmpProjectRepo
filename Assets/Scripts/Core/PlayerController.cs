@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     public int spellNum = 1;
     private int currentSpellIndex = 0;
-
+    public string playerID = "000001";
 
     public Unit unit;
     public GameObject restartUI;
@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
         //var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
         //var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
-        var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
-
+        //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
+        var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
         r.Application(this);
         carriedRelic.Add(r);
     }
