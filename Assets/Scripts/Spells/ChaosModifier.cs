@@ -19,7 +19,7 @@ public class ChaosModifier : ModifierSpell
         if (multiplier == 0)
             setMultiplier();
         int wave = GameManager.Instance.currentWave;
-        int power = 10;
+        //int power = 10;
         //float multiplier = RPNCalculator.EvaluateFloat(damageMultiplierExpr, wave, power);
         spell.final_damage = Mathf.RoundToInt(spell.final_damage * multiplier);
 

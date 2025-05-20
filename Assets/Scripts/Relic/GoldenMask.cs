@@ -38,7 +38,7 @@ public class GoldenMask:Relic
         {
             // 1. apply relic
             pc.player.spellcaster.spellPower += amount;
-            pc.player.spellcaster.resetSpellsData();
+            //pc.player.spellcaster.resetSpellsData();
             Debug.Log($"Golden Mask: Applied +{amount} spellpower (Now: {pc.player.spellcaster.spellPower})");
 
             // 2. retreive coroutine
@@ -58,7 +58,7 @@ public class GoldenMask:Relic
         if (pc.player?.spellcaster != null)
         {
             pc.player.spellcaster.spellPower = originalSpellPower;
-            pc.player.spellcaster.resetSpellsData();
+            //pc.player.spellcaster.resetSpellsData();
             Debug.Log("Golden Mask: Spellpower restored");
         }
     }

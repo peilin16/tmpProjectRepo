@@ -32,6 +32,8 @@ public class GoldenCrown : Relic
 
         // 应用法术强度加成
         currentPC.player.spellcaster.spellPower = originalSpellPower + amount;
+        //currentPC.player.spellcaster.resetSpellsData();
+
         Debug.Log($"Golden Crown: Spell Power +{amount} (Now: {currentPC.player.spellcaster.spellPower})");
 
         // 启动3秒计时器

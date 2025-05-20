@@ -43,6 +43,12 @@ public class RelicManager
                 case "Knight Shield":
                     relic = new KnightShield();
                     break;
+                case "Golden Crown":
+                    relic = new GoldenCrown();
+                    break;
+                case "Grand Chronicle":
+                    relic = new GrandChronicle();
+                    break;
                 default:
                     Debug.LogWarning($"Unknown relic: {name}");
                     continue;

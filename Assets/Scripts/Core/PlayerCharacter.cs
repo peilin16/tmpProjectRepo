@@ -11,10 +11,16 @@ public class PlayerCharacter
     public GameObject playerObject;
 
 
-
     public PlayerCharacter(GameObject obj)
     {
         playerObject = obj;
+        LoadCharacter();
+
+    }
+    public PlayerCharacter(GameObject obj, int iconIndex = 0)
+    {
+        playerObject = obj;
+        this.characterIndex = iconIndex;
         LoadCharacter();
     }
     

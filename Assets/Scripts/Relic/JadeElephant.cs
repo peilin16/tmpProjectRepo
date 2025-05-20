@@ -28,7 +28,7 @@ public class JadeElephant : Relic
         if (!triggered && GameManager.Instance.player.TryGetComponent(out PlayerController pc))
         {
             pc.player.spellcaster.spellPower += amount;
-            pc.player.spellcaster.resetSpellsData();
+            //pc.player.spellcaster.resetSpellsData();
             triggered = true;
             Debug.Log($"Jade Elephant: +{amount} spellpower");
         }
@@ -39,7 +39,7 @@ public class JadeElephant : Relic
         if (isActive && pc.unit.movement.sqrMagnitude > 0.01f)
         {
             pc.player.spellcaster.spellPower -= amount;
-            pc.player.spellcaster.resetSpellsData();
+            //pc.player.spellcaster.resetSpellsData();
             isActive = false;
             Debug.Log("Jade Elephant: Bonus removed (player moved)");
         }

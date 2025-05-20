@@ -4,7 +4,22 @@ using System.Collections.Generic;
 
 public class SpellCaster 
 {
-    public int mana;
+
+    private float _spellPower;
+    private int _mana;
+    public int mana
+    {
+        get => _mana;
+        set
+        {
+            int newValue = Mathf.Min(value, max_mana);
+            if (_mana != newValue)
+            {
+                _mana = newValue;
+                OnManaChanged();
+            }
+        }
+    }
     public int max_mana;
     public int mana_reg;
     public Hittable.Team team;
@@ -12,7 +27,22 @@ public class SpellCaster
     public List<Spell> spells;
 
     public PlayerController playerController;
-    public float spellPower;
+    public float spellPower
+    {
+        get => _spellPower;
+        set
+        {
+            if (_spellPower != value)
+            {
+                _spellPower = value;
+                OnPowerChanged();
+            }
+        }
+    }
+
+
+
+
     public Vector3 current_where;
     public Vector3 current_target;
     public IEnumerator ManaRegeneration()
@@ -37,13 +67,15 @@ public class SpellCaster
 
     public SpellCaster(int mana, int mana_reg, Hittable.Team team, float power)
     {
-        this.mana = mana;
+
         this.max_mana = mana;
         this.mana_reg = mana_reg;
         this.team = team;
-        this.spellPower = power;
+
         Debug.Log(" mana:" + this.mana + " power:" + this.spellPower + " max_mana:" + this.max_mana );
         spells = new List<Spell>();
+        this.spellPower = power;
+        this.mana = mana;
         Spell inner = builder.Build(this, "arcane_bolt");
         spells.Add(inner);
         //spells.Add(builder.MakeRandomSpell(this));
@@ -77,37 +109,45 @@ public class SpellCaster
         //OnSpellCast?.Invoke(spell);
         yield break;
     }
-    public void resetSpellsData()
+    private void OnPowerChanged()
     {
         int wave = GameManager.Instance.currentWave;
 
         foreach (Spell spell in spells)
         {
+            // 只更新与法术强度相关的属性
             if (spell.data.damage != null && !string.IsNullOrEmpty(spell.data.damage.amount))
             {
-                spell.final_damage =RPNCalculator.EvaluateFloat(spell.data.damage.amount, wave, this.spellPower);
-            }
-
-            // Optional: re-evaluate cooldown, speed, mana if relics can modify them too
-            /*if (!string.IsNullOrEmpty(spell.data.cooldown))
-            {
-                spell.data.final_cooldown = RPNCalculator.EvaluateFloat(spell.data.cooldown, wave, Mathf.RoundToInt(this.spellPower));
-            }
-
-            if (!string.IsNullOrEmpty(spell.data.mana_cost))
-            {
-                spell.data.final_mana_cost = Mathf.FloorToInt(
-                    RPNCalculator.EvaluateFloat(spell.data.mana_cost, wave, Mathf.RoundToInt(this.spellPower))
+                spell.final_damage = RPNCalculator.EvaluateFloat(
+                    spell.data.damage.amount,
+                    wave,
+                    this._spellPower
                 );
             }
 
-            if (spell.data.projectile != null && !string.IsNullOrEmpty(spell.data.projectile.speed))
-            {
-                spell.data.projectile.final_speed = RPNCalculator.EvaluateFloat(
-                    spell.data.projectile.speed, wave, Mathf.RoundToInt(this.spellPower));
-            }*/
+           // Debug.Log($"Power Updated: {spell.GetName()} | " +    $"New Damage: {spell.final_damage}");
+        }
+    }
 
-            Debug.Log($"Reset Method Call:[Spell Reset] {spell.GetName()} - Damage: {spell.final_damage}, Cooldown: {spell.final_cooldown}, Mana: {spell.final_mana_cost}");
+    private void OnManaChanged()
+    {
+        int wave = GameManager.Instance.currentWave;
+
+        foreach (Spell spell in spells)
+        {
+            // 只更新与法力消耗相关的属性
+            if (!string.IsNullOrEmpty(spell.data.mana_cost))
+            {
+                spell.final_mana_cost = Mathf.FloorToInt(
+                    RPNCalculator.EvaluateFloat(
+                        spell.data.mana_cost,
+                        wave,
+                        this._spellPower // 仍然需要spellPower作为计算参数
+                    )
+                );
+            }
+
+            //Debug.Log($"Mana Updated: {spell.GetName()} | " + $"New Mana Cost: {spell.final_mana_cost}");
         }
     }
 }

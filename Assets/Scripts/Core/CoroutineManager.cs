@@ -19,42 +19,44 @@ public class CoroutineManager : MonoBehaviour
         }
     }
 
-    // 存储协程：group -> id -> Coroutine
+    // ：group -> id -> Coroutine
     private Dictionary<string, Dictionary<string, Coroutine>> groupedCoroutines = new Dictionary<string, Dictionary<string, Coroutine>>();
 
-    /// <summary>
-    /// 启动协程（带 ID 和分组），自动覆盖同 ID
-    /// </summary>
+
     public Coroutine StartManagedCoroutine(string group, string id, IEnumerator routine)
     {
-        // 确保分组字典存在
+
         if (!groupedCoroutines.ContainsKey(group))
         {
             groupedCoroutines[group] = new Dictionary<string, Coroutine>();
         }
 
-        // 停止现有协程（如果存在）
+
         if (groupedCoroutines[group].TryGetValue(id, out var existing))
         {
             StopCoroutine(existing);
             groupedCoroutines[group].Remove(id);
         }
 
-        // 启动新协程
+
         Coroutine c = StartCoroutine(WrappedCoroutine(group, id, routine));
-        groupedCoroutines[group][id] = c; // 现在这个键肯定存在
+        groupedCoroutines[group][id] = c; 
         return c;
     }
 
     /// <summary>
-    /// 包装协程，在结束时自动移除记录
+    /// wrapped coroutine
     /// </summary>
     private IEnumerator WrappedCoroutine(string group, string id, IEnumerator routine)
     {
         yield return routine;
-        groupedCoroutines[group].Remove(id);
-        if (groupedCoroutines[group].Count == 0)
-            groupedCoroutines.Remove(group);
+
+        if (groupedCoroutines.TryGetValue(group, out var dict))
+        {
+            dict.Remove(id);
+            if (dict.Count == 0)
+                groupedCoroutines.Remove(group);
+        }
     }
 
     /// <summary>

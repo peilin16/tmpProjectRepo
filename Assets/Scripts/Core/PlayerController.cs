@@ -35,25 +35,31 @@ public class PlayerController : MonoBehaviour
         unit = GetComponent<Unit>();
 
         GameManager.Instance.player = this.gameObject;
-    }
-    public void loadCharacter()
-    {
+        EventBus.Instance.OnPlayerDeath += HandlePlayerDeath;
 
-        player = new PlayerCharacter(gameObject);
+    }
+    public void loadCharacter(int index = 0)
+    {
+        //this.player.characterIndex = index;
+        player = new PlayerCharacter(gameObject, index);
+        
         //var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
         //var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
-        var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
-        r.Application(this);
-        carriedRelic.Add(r);
+        //var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
+        //var r = GameManager.Instance.relicManager.GetRelic<GoldenCrown> ("Golden Crown");
+        // var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
+        //r.Application(this);
+        //carriedRelic.Add(r);
     }
 
 
     public void StartLevel()
     {
         //Test instance
-        loadCharacter();
+        if(this.player == null)
+            loadCharacter();
 
 
         playerTile.SetClassSprite(GameManager.Instance.playerSpriteManager.currentIconIndex);
@@ -158,7 +164,13 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.state == GameManager.GameState.PREGAME || GameManager.Instance.state == GameManager.GameState.GAMEOVER) return;
         unit.movement = value.Get<Vector2>()*player.speed;
     }
-
+    private void HandlePlayerDeath(GameObject obj)
+    {
+        if (obj == this.gameObject)
+        {
+            Die(); // existing method
+        }
+    }
     public void Die()
     {
         player.Die();

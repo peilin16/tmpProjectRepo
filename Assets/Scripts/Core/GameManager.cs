@@ -63,7 +63,7 @@ public class GameManager
     
     public void DestroyAllEnemies()
     {
-        /*List<GameObject> enemiesToDestroy = new List<GameObject>(enemies);
+        List<GameObject> enemiesToDestroy = new List<GameObject>(enemies);
         foreach (GameObject enemy in enemiesToDestroy)
         {
             if (enemy != null)
@@ -77,7 +77,7 @@ public class GameManager
                 }
             }
         }
-        enemies.Clear();*/
+        enemies.Clear();
     }
 
     public GameObject GetClosestEnemy(Vector3 point)

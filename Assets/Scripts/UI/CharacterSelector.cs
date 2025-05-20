@@ -9,6 +9,7 @@ public class CharacterSelector : MonoBehaviour
     public SpriteView spriteView2;
     public SpriteView spriteView3;
     public GameObject DifficultSelector;
+    public PlayerController playerController;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
@@ -20,10 +21,9 @@ public class CharacterSelector : MonoBehaviour
 
     public void Chosen(int index)
     {
-
-
+        
         GameManager.Instance.playerSpriteManager.currentIconIndex = index;
-
+        playerController.loadCharacter(index);
         DifficultSelector.SetActive(true);
         gameObject.SetActive(false);
     }

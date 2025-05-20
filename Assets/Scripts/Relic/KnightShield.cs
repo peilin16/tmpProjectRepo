@@ -36,7 +36,7 @@ public class KnightShield : Relic
             );
         }
         // 条件：血量≥15%或玩家死亡时停止
-        else if (isActive && (currentHealthPercent >= 0.15f || currentPC.player.hp.hp <= 0))
+        else if (isActive && (currentPC.player.hp.hp >= (int)recoveryThreshold || currentPC.player.hp.hp <= 0))
         {
             StopRecovery();
         }
@@ -63,14 +63,14 @@ public class KnightShield : Relic
             {
                 currentPC.healthui.SetHealth(currentPC.player.hp);
             }
-            Debug.Log("KnightShield Trigger: Heal " + currentPC.player.hp.hp + " recovery " + recoveryThreshold);
+            Debug.Log("KnightShield Trigger: Heal " + currentPC.player.hp.hp + " recovery " + recoveryThreshold +" target "+ targetHealth);
             // 检查是否达到终止条件
-            if (currentPC.player.hp.hp >= (int)recoveryThreshold ||
-                currentPC.player.hp.hp <= 0)
+            /*if (currentPC.player.hp.hp >= (int)recoveryThreshold || currentPC.player.hp.hp <= 0)
             {
                 StopRecovery();
+                Debug.Log("KnightShield Inactive");
                 yield break;
-            }
+            }*/
 
             yield return new WaitForSeconds(1f); // 每秒恢复一次
         }
@@ -82,7 +82,7 @@ public class KnightShield : Relic
         {
             Debug.Log("KnightShield Inactive");
             isActive = false;
-            currentPC.player.hp.hp += (int)(currentPC.player.hp.hp * 0.6f);
+            currentPC.player.hp.hp += (int)(currentPC.player.hp.max_hp * 0.01f);
             CoroutineManager.Instance.StopManagedCoroutine(
                 "KnightShield",
                 currentPC.playerID
