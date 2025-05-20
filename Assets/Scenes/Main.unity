@@ -4534,6 +4534,7 @@ MonoBehaviour:
   spriteView2: {fileID: 2021942826}
   spriteView3: {fileID: 1101782821}
   DifficultSelector: {fileID: 1115058366}
+  playerController: {fileID: 1718273952}
 --- !u!1 &663390607
 GameObject:
   m_ObjectHideFlags: 0
@@ -10980,6 +10981,7 @@ MonoBehaviour:
   spellui: {fileID: 2085212185}
   playerTile: {fileID: 232596023}
   spellNum: 1
+  playerID: 000001
   unit: {fileID: 0}
   restartUI: {fileID: 0}
 --- !u!4 &1718273953
@@ -61879,11 +61881,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 169.9047
+      value: 225.79669
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150.42792
+      value: -157.41443
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
