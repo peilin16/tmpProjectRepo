@@ -88,7 +88,7 @@ public class RewardScreen : MonoBehaviour
         spellui2.SetSpell(null);
         spellui3.SetSpell(null);
         generatedSpells.Clear();
-
+        this.gameObject.SetActive(false);
         // GameManager.Instance.NextWave(); // Uncomment if wave advancing is handled here
     }
 

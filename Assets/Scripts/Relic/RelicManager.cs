@@ -61,7 +61,12 @@ public class RelicManager
         Debug.Log($"Loaded {relics.Count} relics.");
     }
 
-
+    public List<Relic> GetAllRelics()
+    {
+        if (relics.Count == 0)
+            LoadRelic();
+        return new List<Relic>(relics.Values);
+    }
 
     public T GetRelic<T>(string name) where T : Relic
     {

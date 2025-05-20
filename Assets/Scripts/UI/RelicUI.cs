@@ -12,32 +12,39 @@ public class RelicUI : MonoBehaviour
     public TextMeshProUGUI RelicImfomation2;
     public TextMeshProUGUI RelicImfomation3;
     public List<Relic> displayRelic = new List<Relic>();
+
+    public PlayerController player;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // Static list of available relic names
-    private static readonly string[] allRelicNames = {
-        "Green Gem", "Jade Elephant", "Golden Mask", "Cursed Scroll"
-    };
+
     public void Start()
     {
-        if(displayRelic.Count > 0)
-            displayRelic.Clear();
-        List<string> chosenNames = new List<string>();
+        displayRelic.Clear();
 
-        // Randomly choose 3 unique relic names
-        while (chosenNames.Count < 3)
+        // Get full relic list from RelicManager
+        var allRelics = GameManager.Instance.relicManager.GetAllRelics(); 
+        var carried = player.carriedRelic;
+
+        // Filter out already carried relics
+        List<Relic> available = new List<Relic>();
+        foreach (var relic in allRelics)
         {
-            string candidate = allRelicNames[Random.Range(0, allRelicNames.Length)];
-            if (!chosenNames.Contains(candidate))
-                chosenNames.Add(candidate);
+            if (!carried.Exists(r => r.name == relic.name))
+            {
+                available.Add(relic);
+            }
         }
 
-        // Fetch relics from manager and populate UI
-        for (int i = 0; i < 3; i++)
+        // Shuffle and take 3 unique ones
+        for (int i = 0; i < 3 && available.Count > 0; i++)
         {
-            var r = GameManager.Instance.relicManager.GetRelic<GreenGem>("Green Gem");
+            int index = Random.Range(0, available.Count);
+            var r = available[index];
+            available.RemoveAt(index);
             displayRelic.Add(r);
 
-            // Apply sprite and text
             switch (i)
             {
                 case 0:
@@ -54,9 +61,12 @@ public class RelicUI : MonoBehaviour
                     break;
             }
         }
-
     }
-    
+    public void RelicUIStart()
+    {
+
+        //this.SetActive(true);
+    }
     string FormatRelicText(Relic relic)
     {
         return $"<b>Trigger:</b> {relic.triggerDescription}\n<b>Effect:</b> {relic.effectDescription}";
@@ -69,7 +79,7 @@ public class RelicUI : MonoBehaviour
             Debug.LogError("Invalid relic selection index.");
             return;
         }
-
+        player.carriedRelic.Add(displayRelic[index]);
        // Relic selected = displayRelic[index];
         //GameManager.Instance.relicInventory.AddRelic(selected); 
 

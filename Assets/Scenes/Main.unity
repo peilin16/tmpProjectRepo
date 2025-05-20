@@ -1181,6 +1181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewardUI: {fileID: 1709288111}
   restartUI: {fileID: 663390607}
+  relicUIobj: {fileID: 1576150842}
+  relicUI: {fileID: 1576150846}
 --- !u!4 &220180078
 Transform:
   m_ObjectHideFlags: 0
@@ -1739,10 +1741,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 519420033}
-        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-        m_MethodName: NextWave
-        m_Mode: 1
+      - m_Target: {fileID: 1709288111}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1750,6 +1752,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1576150842}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &284566019
 MonoBehaviour:
@@ -4409,11 +4423,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 453
+      value: 468
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157.41443
+      value: -166.18677
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6214,10 +6228,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 519420033}
-        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-        m_MethodName: NextWave
-        m_Mode: 1
+      - m_Target: {fileID: 1709288111}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6225,6 +6239,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1576150842}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &939247195
 MonoBehaviour:
@@ -7214,14 +7240,26 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterSelector, Assembly-CSharp
+      - m_Target: {fileID: 1576150846}
+        m_TargetAssemblyTypeName: RelicUI, Assembly-CSharp
         m_MethodName: Chosen
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
+        m_MethodName: NextWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7347,10 +7385,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterSelector, Assembly-CSharp
+      - m_Target: {fileID: 1576150846}
+        m_TargetAssemblyTypeName: RelicUI, Assembly-CSharp
         m_MethodName: Chosen
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
+        m_MethodName: NextWave
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7826,7 +7876,6 @@ GameObject:
   - component: {fileID: 1202924359}
   - component: {fileID: 1202924361}
   - component: {fileID: 1202924360}
-  - component: {fileID: 1202924362}
   m_Layer: 5
   m_Name: RelicUI
   m_TagString: Untagged
@@ -7891,20 +7940,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202924358}
   m_CullTransparentMesh: 1
---- !u!114 &1202924362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202924358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec995af6e64492b49bc7c6b66acd06c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relicUIPrefab: {fileID: 7557543120329724951, guid: 0fc6ca25fb4ca524ab2a9d7d17db72de, type: 3}
-  player: {fileID: 1718273952}
 --- !u!1 &1218915916
 GameObject:
   m_ObjectHideFlags: 0
@@ -8900,14 +8935,26 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CharacterSelector, Assembly-CSharp
+      - m_Target: {fileID: 1576150846}
+        m_TargetAssemblyTypeName: RelicUI, Assembly-CSharp
         m_MethodName: Chosen
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 519420033}
+        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
+        m_MethodName: NextWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9020,11 +9067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 685.5897
+      value: 686.88794
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157.41443
+      value: -166.18677
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -10210,6 +10257,7 @@ MonoBehaviour:
   RelicImfomation1: {fileID: 705966185}
   RelicImfomation2: {fileID: 2088460805}
   RelicImfomation3: {fileID: 1382287482}
+  player: {fileID: 1718273952}
 --- !u!1 &1577913786
 GameObject:
   m_ObjectHideFlags: 0
@@ -10350,10 +10398,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 519420033}
-        m_TargetAssemblyTypeName: EnemySpawner, Assembly-CSharp
-        m_MethodName: NextWave
-        m_Mode: 1
+      - m_Target: {fileID: 1709288111}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -10361,6 +10409,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1576150842}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1607238929
 MonoBehaviour:
@@ -61881,11 +61941,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 225.79669
+      value: 247.14026
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -157.41443
+      value: -166.18677
       objectReference: {fileID: 0}
     - target: {fileID: 3157402949940865734, guid: 7ca432ceb7bb94b4c85dd1d42dba15ea, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
