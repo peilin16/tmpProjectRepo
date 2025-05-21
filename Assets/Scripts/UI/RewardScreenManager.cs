@@ -7,6 +7,7 @@ public class RewardScreenManager : MonoBehaviour
     public GameObject restartUI;
     public GameObject relicUIobj;
     public RelicUI relicUI;
+    public bool isDisplay = false;
     //public TextMeshProUGUI restartUITitle;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -18,12 +19,12 @@ public class RewardScreenManager : MonoBehaviour
     public void Update()
     {
         
-        if (GameManager.Instance.state == GameManager.GameState.WAVEEND)
+        if (GameManager.Instance.state == GameManager.GameState.WAVEEND && !isDisplay)
         {
             rewardUI.SetActive(true);
             rewardUI.SetActive(!(GameManager.Instance.currentWave + 1 == GameManager.Instance.maxWaves));
             restartUI.SetActive(GameManager.Instance.currentWave + 1 == GameManager.Instance.maxWaves);
-
+            isDisplay = true;
            // restartUITitle.text = GameManager.Instance.currentWave + 1 == GameManager.Instance.maxWaves ? "YOU WIN" : "GAME OVER";
         }
         else if (GameManager.Instance.state == GameManager.GameState.GAMEOVER)
@@ -32,11 +33,11 @@ public class RewardScreenManager : MonoBehaviour
             rewardUI.SetActive(false);
 
         }
-        else
+        else if(GameManager.Instance.state != GameManager.GameState.WAVEEND)
         {
-            rewardUI.SetActive(false);
-            restartUI.SetActive(false);
-
+            //rewardUI.SetActive(false);
+            //restartUI.SetActive(false);
+            isDisplay = false;
         }
        /* var rewardWave = rewardUI.transform.Find("Wave").GetComponent<TextMeshProUGUI>();
         var restartWave = restartUI.transform.Find("Wave").GetComponent<TextMeshProUGUI>();
