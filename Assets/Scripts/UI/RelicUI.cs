@@ -31,7 +31,7 @@ public class RelicUI : MonoBehaviour
         List<Relic> available = new List<Relic>();
         foreach (var relic in allRelics)
         {
-            if (!carried.Exists(r => r.name == relic.name))
+            if (!player.carriedRelic.Contains(relic))
             {
                 available.Add(relic);
             }

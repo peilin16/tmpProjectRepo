@@ -55,10 +55,10 @@ public class GameManager
     public void RemoveEnemy(GameObject enemy)
     {
         defectCount++;
-        Debug.Log(this.enemy_count);
+       // Debug.Log(this.enemy_count);
         //EventBus.Instance.EnemyDied(enemy);
         enemies.Remove(enemy);
-        Debug.Log(this.enemy_count);
+        //Debug.Log(this.enemy_count);
     }
     
     public void DestroyAllEnemies()

@@ -45,13 +45,13 @@ public class PlayerController : MonoBehaviour
         //var r = GameManager.Instance.relicManager.GetRelic<GreenGem> ("Green Gem");
         //var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
         //var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
-        var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
+        //var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenCrown> ("Golden Crown");
-        // var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
+        /* var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
         r.Application(this);
-        carriedRelic.Add(r);
+        carriedRelic.Add(r);*/
     }
 
 
