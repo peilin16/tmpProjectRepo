@@ -9,8 +9,10 @@ public class PlayerCharacter
     public int characterIndex = 0;
     //public float spellpower;
     public GameObject playerObject;
-
-
+    public string mana_exp;
+    public string hp_exp;
+    public string pow_exp;
+    public string speed_exp;
     public PlayerCharacter(GameObject obj)
     {
         playerObject = obj;
@@ -26,7 +28,11 @@ public class PlayerCharacter
     
     public virtual void StartLevel()
     {
-        
+        this.spellcaster.spellPower = this.spellcaster.spellPower;
+        this.spellcaster.mana = this.spellcaster.mana;
+        this.hp.SetMaxHP((int)RPNCalculator.EvaluateFloat(hp_exp, GameManager.Instance.currentWave));
+        this.speed = (int)RPNCalculator.EvaluateFloat(speed_exp, GameManager.Instance.currentWave);
+        this.hp.hp = this.hp.max_hp;
     }
     protected void LoadCharacter()
     {
@@ -60,7 +66,10 @@ public class PlayerCharacter
         float moveSpeed = RPNCalculator.EvaluateFloat(classData["speed"].ToString(), wave);
         float spellpower = RPNCalculator.EvaluateFloat(classData["spellpower"].ToString(), wave);
         speed = Mathf.RoundToInt(moveSpeed);
-
+        this.mana_exp = classData["mana"].ToString();
+        this.hp_exp = classData["health"].ToString();
+        this.speed_exp = classData["speed"].ToString();
+        this.pow_exp = classData["spellpower"].ToString();
         // Initialize gameplay components
         spellcaster = new SpellCaster(Mathf.RoundToInt(mana), Mathf.RoundToInt(manaReg), Hittable.Team.PLAYER, spellpower);
         hp = new Hittable(Mathf.RoundToInt(health), Hittable.Team.PLAYER, playerObject);

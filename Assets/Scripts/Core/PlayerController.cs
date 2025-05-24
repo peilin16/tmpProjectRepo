@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
         playerTile.SetClassSprite(GameManager.Instance.playerSpriteManager.currentIconIndex);
         player.characterIndex = GameManager.Instance.playerSpriteManager.currentIconIndex;
+        //reset player data
         player.StartLevel();
         // Initialize UI
         healthui.SetHealth(player.hp);

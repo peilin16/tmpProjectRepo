@@ -5,7 +5,7 @@ public class JadeElephant : Relic
     public float triggerAmount;
     private bool triggered = false;
     private Vector3 lastPosition;
-    private bool isFirstFrame = true;
+    //private bool isFirstFrame = true;
     public bool isActive = true;
     public override void JsonInit(JObject jsonObj)
     {
@@ -19,7 +19,7 @@ public class JadeElephant : Relic
     }
     public override void Application(PlayerController pc)
     {
-        // 订阅无参数事件
+
         EventBus.Instance.OnPlayerStandStill += OnStandStill;
     }
 

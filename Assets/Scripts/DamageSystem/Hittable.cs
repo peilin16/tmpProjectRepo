@@ -14,7 +14,7 @@ public class Hittable
 
     public void Damage(Damage damage)
     {
-        // 触发物理伤害事件（通用）
+
         EventBus.Instance.TriggerPhysicalDamage(owner.transform.position, damage, this);
 
         // 扣血逻辑
