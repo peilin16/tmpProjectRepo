@@ -141,7 +141,8 @@ public class SpellCaster
                 spell.final_mana_cost = Mathf.FloorToInt(
                     RPNCalculator.EvaluateFloat(
                         spell.data.mana_cost,
-                        wave
+                        wave,
+                        this._spellPower
                     )
                 );
             }

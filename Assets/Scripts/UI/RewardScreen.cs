@@ -16,18 +16,17 @@ public class RewardScreen : MonoBehaviour
     private Spell generatedSpell;
     public SpellUIContainer playerSpellUIs;
 
-    void Start()
-    {
-        ShowSpellReward();
-        //GameManager.Instance.rewardScreen = this;
-    }
+
 
     void Update()
     {
 
     }
 
-
+    void OnEnable()
+    {
+        ShowSpellReward();
+    }
     public void ShowSpellReward()
     {
         generatedSpells.Clear();

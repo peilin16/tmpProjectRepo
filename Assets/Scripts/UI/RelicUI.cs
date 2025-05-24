@@ -19,7 +19,7 @@ public class RelicUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // Static list of available relic names
 
-    public void Start()
+    public void OnEnable()
     {
         displayRelic.Clear();
 
