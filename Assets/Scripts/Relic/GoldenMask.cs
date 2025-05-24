@@ -5,6 +5,7 @@ public class GoldenMask:Relic
 {
     
     private bool isBuffActive = false;
+    private float ifActivePower;
     private float originalSpellPower; 
     public override void JsonInit(JObject jsonObj)
     {
@@ -17,8 +18,8 @@ public class GoldenMask:Relic
     {
 
         EventBus.Instance.OnPlayerDamaged += OnPlayerDamaged;
-        originalSpellPower = pc.player.spellcaster.spellPower; 
-        // 订阅施法事件
+        originalSpellPower = pc.player.spellcaster.spellPower;
+        ifActivePower = pc.player.spellcaster.spellPower += amount;
         EventBus.Instance.PlayerCast += OnPlayerCast;
     }
 
@@ -37,18 +38,23 @@ public class GoldenMask:Relic
         if (isBuffActive && pc.player?.spellcaster != null)
         {
             // 1. apply relic
-            pc.player.spellcaster.spellPower += amount;
+
+            pc.player.spellcaster.spellPower = ifActivePower;
             //pc.player.spellcaster.resetSpellsData();
             Debug.Log($"Golden Mask: Applied +{amount} spellpower (Now: {pc.player.spellcaster.spellPower})");
 
             // 2. retreive coroutine
             //pc.StartCoroutine();
-            CoroutineManager.Instance.StartManagedCoroutine("Relic_Effect", this.name, ResetAfterCast(pc));
+            //CoroutineManager.Instance.StartManagedCoroutine("Relic_Effect", this.name, ResetAfterCast(pc));
             // 3. reset
             isBuffActive = false;
         }
+        else if(!isBuffActive && pc.player?.spellcaster != null)
+        {
+            ResetAfterCast(pc);
+        }
     }
-
+    /*
     private IEnumerator ResetAfterCast(PlayerController pc)
     {
         
@@ -61,6 +67,16 @@ public class GoldenMask:Relic
             //pc.player.spellcaster.resetSpellsData();
             Debug.Log("Golden Mask: Spellpower restored");
         }
+    }*/
+    private void ResetAfterCast(PlayerController pc)
+    {
+        if(pc.player.spellcaster.spellPower != originalSpellPower)
+        {
+            pc.player.spellcaster.spellPower = originalSpellPower;
+            //pc.player.spellcaster.resetSpellsData();
+            Debug.Log("Golden Mask: Spellpower restored");
+        }
+
     }
 
     public override void OnRemoved()

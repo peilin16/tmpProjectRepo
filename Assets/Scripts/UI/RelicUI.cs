@@ -40,8 +40,11 @@ public class RelicUI : MonoBehaviour
         // Shuffle and take 3 unique ones
         for (int i = 0; i < 3 && available.Count > 0; i++)
         {
+
             int index = Random.Range(0, available.Count);
+            Debug.Log("index:" + index + " count:" + available.Count);
             var r = available[index];
+            Debug.Log("name:" + r.name);
             available.RemoveAt(index);
             displayRelic.Add(r);
 
@@ -74,15 +77,23 @@ public class RelicUI : MonoBehaviour
 
     public void Chosen(int index)
     {
-        if (index < 0 || index >= displayRelic.Count)
+        if (index < 0 || index >=  displayRelic.Count)
         {
             Debug.LogError("Invalid relic selection index.");
             return;
         }
-        player.carriedRelic.Add(displayRelic[index]);
-       // Relic selected = displayRelic[index];
+        player.TakeRelic(displayRelic[index]);
+        // Relic selected = displayRelic[index];
         //GameManager.Instance.relicInventory.AddRelic(selected); 
+        foreach(var i in player.carriedRelic)
+        {
+            Debug.Log("relic:" + i.name + "count:" +i.triggerDescription);
+        }
 
+
+
+
+        displayRelic.Clear();
         gameObject.SetActive(false);
     }
 }

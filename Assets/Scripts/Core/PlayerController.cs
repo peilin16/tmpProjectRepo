@@ -42,16 +42,16 @@ public class PlayerController : MonoBehaviour
     {
         //this.player.characterIndex = index;
         player = new PlayerCharacter(gameObject, index);
-        
+        //var r = GameManager.Instance.relicManager.GetRelic<GreenGem> ("Green Gem");
         //var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
         //var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
-        //var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
+        var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenCrown> ("Golden Crown");
         // var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
-        //r.Application(this);
-        //carriedRelic.Add(r);
+        r.Application(this);
+        carriedRelic.Add(r);
     }
 
 
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         {
             relic.Update(this); // Pass PlayerController to relic
         }
-        // 静止检测（完全本地化处理）
+        //Stop checking
         if ((transform.position - lastPosition).sqrMagnitude < 0.001f)
         {
             localStandStillTime += Time.deltaTime;
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
         lastPosition = transform.position;
 
     }
-    void TakeRelic(Relic relic)
+    public void TakeRelic(Relic relic)
     {
         relic.Application(this);
         carriedRelic.Add(relic);

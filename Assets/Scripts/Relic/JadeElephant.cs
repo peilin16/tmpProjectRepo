@@ -27,10 +27,11 @@ public class JadeElephant : Relic
     {
         if (!triggered && GameManager.Instance.player.TryGetComponent(out PlayerController pc))
         {
+            Debug.Log($"Jade Elephant: + {pc.player.spellcaster.spellPower} spellpower");
             pc.player.spellcaster.spellPower += amount;
             //pc.player.spellcaster.resetSpellsData();
             triggered = true;
-            Debug.Log($"Jade Elephant: +{amount} spellpower");
+            Debug.Log($"Jade Elephant: + {pc.player.spellcaster.spellPower} spellpower");
         }
     }
 

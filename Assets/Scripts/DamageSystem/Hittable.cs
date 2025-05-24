@@ -32,7 +32,7 @@ public class Hittable
                 break;
         }
 
-        // ËÀÍö¼ì²â
+        // die
         if (hp <= 0)
         {
             hp = 0;
