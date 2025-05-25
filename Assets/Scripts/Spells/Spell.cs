@@ -140,7 +140,7 @@ public class Spell
             foreach (var modifier in modifierSpells)
             {
                 modifier.Cast(this);
-                CoroutineManager.Instance.StartManagedCoroutine("Player_spell", modifier.name + i, modifier.OnHitWithCoroutine(this));
+                CoroutineManager.Instance.StartManagedCoroutine("Player_spell", modifier.name + i, modifier.OnHitWithCoroutine(this, other));
                 i += 1;
 
             }
@@ -149,7 +149,7 @@ public class Spell
         {
             // Defaulting to arcane damage type, but can be extended to use data.damage.type
             foreach (var modifier in modifierSpells)
-                modifier.OnHit(this);
+                modifier.OnHit(this, other);
             other.Damage(new Damage(GetDamage(), Damage.Type.ARCANE));
         }
         if (data.secondary_projectile != null)

@@ -6,7 +6,6 @@ public class JadeElephant : Relic
     private bool triggered = false;
     private Vector3 lastPosition;
     //private bool isFirstFrame = true;
-    public bool isActive = true;
     public override void JsonInit(JObject jsonObj)
     {
         base.JsonInit(jsonObj);
@@ -37,11 +36,11 @@ public class JadeElephant : Relic
 
     public override void Update(PlayerController pc)
     {
-        if (isActive && pc.unit.movement.sqrMagnitude > 0.01f)
+        if (triggered && pc.unit.movement.sqrMagnitude > 0.01f)
         {
             pc.player.spellcaster.spellPower -= amount;
             //pc.player.spellcaster.resetSpellsData();
-            isActive = false;
+            triggered = false;
             Debug.Log("Jade Elephant: Bonus removed (player moved)");
         }
     }
