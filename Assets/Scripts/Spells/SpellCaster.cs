@@ -20,7 +20,19 @@ public class SpellCaster
             }
         }
     }
-    public int max_mana;
+    private int _max_mana;
+    public int max_mana
+    {
+        get => _max_mana;
+        set
+        {
+            if (_max_mana != value)
+            {
+                _max_mana = value;
+                //OnMaxManaChanged();
+            }
+        }
+    }
     public int mana_reg;
     public Hittable.Team team;
     public SpellBuilder builder = new SpellBuilder();

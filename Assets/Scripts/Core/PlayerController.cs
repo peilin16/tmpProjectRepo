@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
         //this.player.characterIndex = index;
         player = new PlayerCharacter(gameObject, index);
         //var r = GameManager.Instance.relicManager.GetRelic<GreenGem> ("Green Gem");
-        //var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
-        var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
+        var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
+        //var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");

@@ -9,21 +9,24 @@ public class Relic
     public string triggerDescription;
     public string effectDescription;
     public float amount;
+    public string amount_exp;
     public virtual void JsonInit(JObject jsonObj) {
         name = jsonObj["name"]?.ToString();
         iconIndex = jsonObj["sprite"]?.ToObject<int>() ?? 0;
         triggerDescription = jsonObj["trigger"]?["description"]?.ToString();
         effectDescription = jsonObj["effect"]?["description"]?.ToString();
 
-        string amountStr = jsonObj["effect"]?["amount"]?.ToString();
-        if (!string.IsNullOrEmpty(amountStr))
+        this.amount_exp = jsonObj["effect"]?["amount"]?.ToString();
+        if (!string.IsNullOrEmpty(amount_exp))
         {
-            amount = RPNCalculator.EvaluateFloat(amountStr, GameManager.Instance.currentWave, 10);
+            this.amount = RPNCalculator.EvaluateFloat(amount_exp, GameManager.Instance.currentWave);
         }
 
+    }
+    public virtual void StartLevel(PlayerController pc) {
+        this.amount = RPNCalculator.EvaluateFloat(amount_exp, GameManager.Instance.currentWave);
 
     }
-    public virtual void StartLevel(PlayerController pc) { }
     public virtual IEnumerator RelicCoroutine (PlayerController pc)
     {
         yield break;

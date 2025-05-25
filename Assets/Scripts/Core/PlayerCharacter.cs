@@ -28,10 +28,11 @@ public class PlayerCharacter
     
     public virtual void StartLevel()
     {
-        this.spellcaster.spellPower = this.spellcaster.spellPower;
-        this.spellcaster.mana = this.spellcaster.mana;
-        this.hp.SetMaxHP((int)RPNCalculator.EvaluateFloat(hp_exp, GameManager.Instance.currentWave));
-        this.speed = (int)RPNCalculator.EvaluateFloat(speed_exp, GameManager.Instance.currentWave);
+        int wave = GameManager.Instance.currentWave;
+        this.spellcaster.spellPower = RPNCalculator.EvaluateFloat(pow_exp, wave);
+        this.spellcaster.mana = (int)RPNCalculator.EvaluateFloat(mana_exp, wave);
+        this.hp.SetMaxHP((int)RPNCalculator.EvaluateFloat(hp_exp, wave));
+        this.speed = (int)RPNCalculator.EvaluateFloat(speed_exp, wave);
         this.hp.hp = this.hp.max_hp;
     }
     protected void LoadCharacter()
