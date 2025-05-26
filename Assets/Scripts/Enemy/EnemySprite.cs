@@ -5,7 +5,7 @@ public class EnemySprite
 {
     public string name;
     public int spriteIndex;
-    public int hp;
+    public int healthly;
     public int speed;
     public float damage;
 
@@ -13,7 +13,7 @@ public class EnemySprite
     {
         this.name = name;
         this.spriteIndex = spriteIndex;
-        this.hp = hp;
+        this.healthly = hp;
         this.speed = speed;
         this.damage = damage;
     }

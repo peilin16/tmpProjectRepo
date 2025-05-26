@@ -19,6 +19,7 @@ public class RestartUI : MonoBehaviour
     public void RestartGame()
     {
         GameManager.Instance.state = GameManager.GameState.PREGAME;
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

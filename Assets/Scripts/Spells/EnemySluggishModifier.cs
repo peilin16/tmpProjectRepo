@@ -13,7 +13,7 @@ public class EnemySluggishModifier: ModifierSpell
         this.duration = duration;
     }
 
-    public override Spell OnHit(Spell spell, Hittable other)
+    public override Spell OnHit(Spell spell, Controller other)
     {
         // Wrap the existing OnHit behavior to add the slow effect
 

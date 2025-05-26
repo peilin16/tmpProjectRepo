@@ -7,10 +7,27 @@ using System.Collections.Generic;
 
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour ,Controller
 {
 
     public PlayerCharacter player;
+
+    public Character character
+    {
+        get => player;
+        set => player = (PlayerCharacter)value;
+    }
+    public bool IsDead
+    {
+        get => dead;
+        set => dead = value;
+    }
+    private bool dead;
+    public HealthBar HealthUI
+    {
+        get => healthui;
+        set => healthui = value;
+    }
     public SpriteRenderer characterRenderer;
     public HealthBar healthui;
     public ManaBar manaui;
@@ -44,13 +61,13 @@ public class PlayerController : MonoBehaviour
         //this.player.characterIndex = index;
         player = new PlayerCharacter(gameObject, index);
         //var r = GameManager.Instance.relicManager.GetRelic<GreenGem> ("Green Gem");
-        var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
+        //var r = GameManager.Instance.relicManager.GetRelic<CursedScroll> ("Cursed Scroll");
         //var r = GameManager.Instance.relicManager.GetRelic<JadeElephant>("Jade Elephant");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenMask>("Golden Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenCrown> ("Golden Crown");
-        //var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
+        var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
         r.Application(this);
         carriedRelic.Add(r);
     }
@@ -177,7 +194,7 @@ public class PlayerController : MonoBehaviour
     {
         player.Die();
         GameManager.Instance.state = GameManager.GameState.GAMEOVER;
-        GameManager.Instance.DestroyAllEnemies();
+        GameManager.Instance.enemyManager.DestroyAllEnemies();
     }
 
 }

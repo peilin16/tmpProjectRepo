@@ -57,23 +57,24 @@ public static class RPNCalculator
         }
     }
 
-    public static int CalculateEnemyCount(string rpnExpression, int wave, int baseHp)
+    public static float CalculateBaseCount(string rpnExpression, int wave, float baseVal)
     {
 
         try
         {
             var variables = new Dictionary<string, float>
             {
-                { "base", baseHp },  
+                { "base", baseVal },  
                 { "wave", wave }     
             };
 
             float result = Evaluate(rpnExpression, variables);
-            return Mathf.Max(1, Mathf.FloorToInt(result));
+            //Debug.Log(result);
+            return result;
         }
         catch (System.Exception e)
         {
-            Debug.LogError($"HPcalculate fail: {e.Message} ( {rpnExpression})");
+            Debug.LogError($"HP calculate fail: {e.Message} ( {rpnExpression}) ({baseVal})({wave})");
             return -1; // return base
         }
     }
@@ -102,6 +103,7 @@ public static class RPNCalculator
     {
         try
         {
+            //Debug.Log(rpnExpression +";");
             var variables = new Dictionary<string, float>
             {
                 { "wave", wave }

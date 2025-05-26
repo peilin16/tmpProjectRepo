@@ -15,7 +15,7 @@ public class WaveLabelController : MonoBehaviour
     {
         if (GameManager.Instance.state == GameManager.GameState.INWAVE)
         {
-            tmp.text = "Enemies left: " + GameManager.Instance.enemy_count;
+            tmp.text = "Enemies left: " + GameManager.Instance.enemyManager.enemy_count;
         }
         if (GameManager.Instance.state == GameManager.GameState.COUNTDOWN)
         {

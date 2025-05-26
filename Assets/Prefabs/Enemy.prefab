@@ -101,13 +101,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1832418719708313566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 399c9e4011cba3e4c829138ef2eedbda, type: 3}
+  m_Script: {fileID: 11500000, guid: c301e4dd7f2bec2459aeb9b3dad00a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 5
   healthui: {fileID: 7326907792581316403}
   dead: 0
+  speed: 0
   last_attack: 0
 --- !u!61 &6121702002466829456
 BoxCollider2D:

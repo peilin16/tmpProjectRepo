@@ -132,8 +132,9 @@ public class Spell
     }
 
 
-    public void OnHit(Hittable other, Vector3 impact)
+    public void OnHit(Controller other, Vector3 impact)
     {
+        //Debug.Log("on hit");
         if (onHitModified)
         {
             int i = 0;
@@ -145,12 +146,12 @@ public class Spell
 
             }
         }
-        if (other.team != team)
+        if (other.character.hp.team != team)
         {
             // Defaulting to arcane damage type, but can be extended to use data.damage.type
             foreach (var modifier in modifierSpells)
                 modifier.OnHit(this, other);
-            other.Damage(new Damage(GetDamage(), Damage.Type.ARCANE));
+            other.character.hp.Damage(new Damage(GetDamage(), Damage.Type.ARCANE));
         }
         if (data.secondary_projectile != null)
         {
@@ -168,10 +169,10 @@ public class Spell
                     impact,
                     dir,
                     data.secondary_projectile.base_speed,
-                    (Hittable hit, Vector3 _) =>
+                    (Controller other, Vector3 _) =>
                     {
-                        if (hit.team != team)
-                            hit.Damage(new Damage(data.base_secondary_damage, Damage.Type.ARCANE));
+                        if (other.character.hp.team != team)
+                            other.character.hp.Damage(new Damage(data.base_secondary_damage, Damage.Type.ARCANE));
                     },
                     data.secondary_projectile.base_lifetime
                 );

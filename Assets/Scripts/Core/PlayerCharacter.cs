@@ -1,38 +1,39 @@
 using UnityEngine;
 using Newtonsoft.Json.Linq;
-public class PlayerCharacter
+public class PlayerCharacter : Character
 {
-    public Hittable hp;
 
-    public int speed;
     public SpellCaster spellcaster;
     public int characterIndex = 0;
-    //public float spellpower;
-    public GameObject playerObject;
+    public float spellpower;
+
     public string mana_exp;
     public string hp_exp;
     public string pow_exp;
     public string speed_exp;
+
+    public int manaReg;
+    public int mana;
     public PlayerCharacter(GameObject obj)
     {
-        playerObject = obj;
+        gameObject = obj;
         LoadCharacter();
 
     }
     public PlayerCharacter(GameObject obj, int iconIndex = 0)
     {
-        playerObject = obj;
+        gameObject = obj;
         this.characterIndex = iconIndex;
         LoadCharacter();
     }
     
-    public virtual void StartLevel()
+    public override void StartLevel()
     {
         int wave = GameManager.Instance.currentWave;
         this.spellcaster.spellPower = RPNCalculator.EvaluateFloat(pow_exp, wave);
         this.spellcaster.mana = (int)RPNCalculator.EvaluateFloat(mana_exp, wave);
         this.hp.SetMaxHP((int)RPNCalculator.EvaluateFloat(hp_exp, wave));
-        this.speed = (int)RPNCalculator.EvaluateFloat(speed_exp, wave);
+        base.speed = (int)RPNCalculator.EvaluateFloat(speed_exp, wave);
         this.hp.hp = this.hp.max_hp;
     }
     protected void LoadCharacter()
@@ -57,37 +58,46 @@ public class PlayerCharacter
         string classKey = characterKeys[characterIndex];
         JObject classData = (JObject)root[classKey];
 
+        this.JsonLoad(classData);
+
+
+        Debug.Log($"{classKey} initialized with {base.health} HP, {mana} Mana, {manaReg}/s regen, spellpower {spellpower}, speed {base.speed}");
+    }
+
+
+    protected override void JsonLoad(JObject obj)
+    {
         int wave = GameManager.Instance.currentWave;
         //int power = 10;
 
         // Evaluate RPN expressions from JSON
-        float health = RPNCalculator.EvaluateFloat(classData["health"].ToString(), wave);
-        float mana = RPNCalculator.EvaluateFloat(classData["mana"].ToString(), wave);
-        float manaReg = RPNCalculator.EvaluateFloat(classData["mana_regeneration"].ToString(), wave);
-        float moveSpeed = RPNCalculator.EvaluateFloat(classData["speed"].ToString(), wave);
-        float spellpower = RPNCalculator.EvaluateFloat(classData["spellpower"].ToString(), wave);
-        speed = Mathf.RoundToInt(moveSpeed);
-        this.mana_exp = classData["mana"].ToString();
-        this.hp_exp = classData["health"].ToString();
-        this.speed_exp = classData["speed"].ToString();
-        this.pow_exp = classData["spellpower"].ToString();
+        float health = RPNCalculator.EvaluateFloat(obj["health"].ToString(), wave);
+        float mana = RPNCalculator.EvaluateFloat(obj["mana"].ToString(), wave);
+        float manaReg = RPNCalculator.EvaluateFloat(obj["mana_regeneration"].ToString(), wave);
+        float moveSpeed = RPNCalculator.EvaluateFloat(obj["speed"].ToString(), wave);
+        float spellpower = RPNCalculator.EvaluateFloat(obj["spellpower"].ToString(), wave);
+        base.speed = Mathf.RoundToInt(moveSpeed);
+        this.mana_exp = obj["mana"].ToString();
+        this.hp_exp = obj["health"].ToString();
+        this.speed_exp = obj["speed"].ToString();
+        this.pow_exp = obj["spellpower"].ToString();
+        base.health = health;
         // Initialize gameplay components
         spellcaster = new SpellCaster(Mathf.RoundToInt(mana), Mathf.RoundToInt(manaReg), Hittable.Team.PLAYER, spellpower);
-        hp = new Hittable(Mathf.RoundToInt(health), Hittable.Team.PLAYER, playerObject);
+        hp = new Hittable(Mathf.RoundToInt(health), Hittable.Team.PLAYER, gameObject);
         //hp.OnDeath += Die;
         hp.team = Hittable.Team.PLAYER;
-        
-        Debug.Log($"{classKey} initialized with {health} HP, {mana} Mana, {manaReg}/s regen, spellpower {spellpower}, speed {speed}");
     }
-    public virtual void OnAttack()
+
+    public void OnAttack()
     {
 
     }
-    public virtual void Die()
+    public void Die()
     {
 
     }
-    public virtual void OnMove()
+    public void OnMove()
     {
 
     }

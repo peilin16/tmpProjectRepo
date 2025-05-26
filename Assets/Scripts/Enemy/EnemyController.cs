@@ -1,22 +1,47 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, Controller
 {
 
     public Transform target;
-    public int speed;
-    public Hittable hp;
+
     public HealthBar healthui;
     public bool dead;
+    //public Hittable hp;
+    public float speed;
 
+    public EnemyCharacter characterData;  // Implements Controller.character
     public float last_attack;
+
+    public Character character
+    {
+        get => characterData;
+        set => characterData = (EnemyCharacter)value;
+    }
+
+    public HealthBar HealthUI
+    {
+        get => healthui;
+        set => healthui = value;
+    }
+
+    public bool IsDead
+    {
+        get => dead;
+        set => dead = value;
+    }
+
+    //public EnemyCharacter enemy;
+
+        
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        characterData.gameObject = this.gameObject;
         target = GameManager.Instance.player.transform;
         //hp.OnDeath += Die;
         EventBus.Instance.OnMonsterDeath += (gameObject) => this.Die();
-        healthui.SetHealth(hp);
+        healthui.SetHealth(characterData.hp);
     }
 
     // Update is called once per frame
@@ -29,10 +54,13 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            GetComponent<Unit>().movement = direction.normalized * speed;
+            GetComponent<Unit>().movement = direction.normalized * characterData.final_speed;
         }
     }
-    
+    void StartLevel()
+    {
+        characterData.StartLevel();
+    }
     void DoAttack()
     {
         if (last_attack + 2 < Time.time)
@@ -45,10 +73,10 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
-        if (!dead && this.hp.hp <= 0)
+        if (!dead && this.characterData.hp.hp <= 0)
         {
             dead = true;
-            GameManager.Instance.RemoveEnemy(this.gameObject);
+            GameManager.Instance.enemyManager.RemoveEnemy(this.gameObject);
             Destroy(this.gameObject);
         }
     }

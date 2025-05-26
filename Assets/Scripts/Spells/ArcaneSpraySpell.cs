@@ -51,10 +51,10 @@ public class ArcaneSpraySpell : Spell
                 where,
                 sprayDir,
                 final_speed,
-                (Hittable hit, Vector3 _) =>
+                (Controller other, Vector3 _) =>
                 {
-                    if (hit.team != team)
-                        hit.Damage(new Damage(this.final_damage, Damage.Type.ARCANE));
+                    if (other.character.hp.team != team)
+                        other.character.hp.Damage(new Damage(this.final_damage, Damage.Type.ARCANE));
                 },
                 final_life_time
             );

@@ -17,7 +17,7 @@ public class HomingProjectileMovement : ProjectileMovement
             Vector3 direction = transform.rotation * new Vector3(1, 0, 0);
             angle = Mathf.Atan2(direction.y, direction.x);
         }
-        GameObject closest = GameManager.Instance.GetClosestEnemy(transform.position);
+        GameObject closest = GameManager.Instance.enemyManager.GetClosestEnemy(transform.position);
         if (closest == null)
         {
             Vector3 direction = transform.rotation * new Vector3(1, 0, 0);

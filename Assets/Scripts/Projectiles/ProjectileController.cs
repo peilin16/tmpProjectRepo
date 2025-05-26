@@ -5,7 +5,7 @@ using System.Collections;
 public class ProjectileController : MonoBehaviour
 {
     public float lifetime;
-    public event Action<Hittable,Vector3> OnHit;
+    public event Action<Controller, Vector3> OnHit;
     public ProjectileMovement movement;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,14 +29,14 @@ public class ProjectileController : MonoBehaviour
             var ec = collision.gameObject.GetComponent<EnemyController>();
             if (ec != null)
             {
-                OnHit(ec.hp, transform.position);
+                OnHit(ec, transform.position);
             }
             else
             {
                 var pc = collision.gameObject.GetComponent<PlayerController>();
                 if (pc != null)
                 {
-                    OnHit(pc.player.hp, transform.position);
+                    OnHit(pc, transform.position);
                 }
             }
 
