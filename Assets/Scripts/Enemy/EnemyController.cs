@@ -78,6 +78,7 @@ public class EnemyController : MonoBehaviour, Controller
             dead = true;
             GameManager.Instance.enemyManager.RemoveEnemy(this.gameObject);
             Destroy(this.gameObject);
+            Destroy(this.characterData.gameObject);
         }
     }
 }

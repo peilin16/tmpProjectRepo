@@ -32,9 +32,6 @@ public class EnemyManager
                 if (controller != null)
                 {
                     controller.Die();
-                }
-                else
-                {
                     GameObject.Destroy(enemy);
                 }
             }

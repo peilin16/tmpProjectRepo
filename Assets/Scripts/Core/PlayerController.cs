@@ -193,8 +193,9 @@ public class PlayerController : MonoBehaviour ,Controller
     public void Die()
     {
         player.Die();
+        //Debug.Log("aaa");
         GameManager.Instance.state = GameManager.GameState.GAMEOVER;
-        GameManager.Instance.enemyManager.DestroyAllEnemies();
+        GameManager.Instance.RestartGame();
     }
 
 }

@@ -62,7 +62,8 @@ public class EventBus
     }
    public void TriggerOnPlayerDeath(GameObject player)
     {
-        OnPlayerDeath?.Invoke(player);
+        if(GameManager.Instance.state == GameManager.GameState.INWAVE)
+            OnPlayerDeath?.Invoke(player);
     }
 
 

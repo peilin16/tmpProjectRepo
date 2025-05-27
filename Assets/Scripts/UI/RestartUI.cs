@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class RestartUI : MonoBehaviour
 {
+    public GameObject characterSelectorUI; // Assign this in Inspector
     public GameObject restartUI;
     public static RestartUI Instance;
     void Awake()
@@ -20,6 +21,8 @@ public class RestartUI : MonoBehaviour
     {
         GameManager.Instance.state = GameManager.GameState.PREGAME;
         
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        characterSelectorUI.SetActive(true);
+        restartUI.SetActive(false);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

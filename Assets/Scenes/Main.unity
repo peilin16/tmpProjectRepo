@@ -4607,6 +4607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc0c1b4103d6624eac7ca58a5a378e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterSelectorUI: {fileID: 660827029}
   restartUI: {fileID: 663390607}
 --- !u!114 &663390610
 MonoBehaviour:

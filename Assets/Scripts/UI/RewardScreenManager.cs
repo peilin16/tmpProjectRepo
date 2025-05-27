@@ -29,6 +29,7 @@ public class RewardScreenManager : MonoBehaviour
         }
         else if (GameManager.Instance.state == GameManager.GameState.GAMEOVER)
         {
+            Debug.Log("restart");
             restartUI.SetActive(true);
             rewardUI.SetActive(false);
 

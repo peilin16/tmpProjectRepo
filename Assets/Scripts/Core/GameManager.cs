@@ -53,5 +53,10 @@ public class GameManager
     public bool isTiming = false;
     public string difficultly = "Easy";
 
-
+    public void RestartGame()
+    {
+        enemyManager.DestroyAllEnemies();
+        CoroutineManager.Instance.StopGroup("EnemySpawn");
+        //player.player.hp.hp = 1;
+    }
 }

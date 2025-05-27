@@ -53,7 +53,8 @@ public class EnemySpawner : MonoBehaviour
         level_selector.gameObject.SetActive(false);
 
         GameManager.Instance.player.GetComponent<PlayerController>().StartLevel();
-        StartCoroutine(SpawnWave());
+        CoroutineManager.Instance.StartManagedCoroutine("EnemySpawn","wave "+ GameManager.Instance.currentWave, SpawnWave());
+        //StartCoroutine(SpawnWave());
     }
 
     public void NextWave()
@@ -64,7 +65,8 @@ public class EnemySpawner : MonoBehaviour
             currentLevel.NextWave();
 
             if (GameManager.Instance.currentWave <= currentLevel.total_waves)
-                StartCoroutine(SpawnWave());
+                CoroutineManager.Instance.StartManagedCoroutine("EnemySpawn", "wave " + GameManager.Instance.currentWave, SpawnWave());
+            //StartCoroutine(SpawnWave());
             else
                 Debug.Log("All waves complete.");
         }
