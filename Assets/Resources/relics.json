@@ -115,7 +115,7 @@
 
     "trigger": {
       "description": "When a new wave starts",
-      "type": "wave-start",
+      "type": "wave-start"
     },
     "effect": {
       "description": "gain 25 additional spellpower for 10 seconds.",
