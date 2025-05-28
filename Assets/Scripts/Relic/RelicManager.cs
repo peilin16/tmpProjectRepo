@@ -49,6 +49,9 @@ public class RelicManager
                 case "Grand Chronicle":
                     relic = new GrandChronicle();
                     break;
+                case "Red Necklace":
+                    relic = new RedNecklace();
+                    break;
                 default:
                     Debug.LogWarning($"Unknown relic: {name}");
                     continue;

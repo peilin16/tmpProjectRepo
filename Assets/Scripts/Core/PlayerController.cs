@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour ,Controller
         //var r = GameManager.Instance.relicManager.GetRelic<MysteriousMask> ("Mysterious Mask");
         //var r = GameManager.Instance.relicManager.GetRelic<KnightShield> ("Knight Shield");
         //var r = GameManager.Instance.relicManager.GetRelic<GoldenCrown> ("Golden Crown");
-        var r = GameManager.Instance.relicManager.GetRelic<GrandChronicle> ("Grand Chronicle");
+        var r = GameManager.Instance.relicManager.GetRelic<RedNecklace> ("Red Necklace");
         r.Application(this);
         carriedRelic.Add(r);
     }
@@ -99,8 +99,16 @@ public class PlayerController : MonoBehaviour ,Controller
         /*spellUIs[0].SetSpell(spellcaster.spells[0]); // Arcane Bolt
         spellUIs[1].SetSpell(spellcaster.spells[1]); // Magic Missile*/
         // Start mana regen
-    }
+        this.StartWave();
 
+    }
+    public void StartWave()
+    {
+        foreach (var relic in carriedRelic)
+        {
+            relic.StartWave(this);
+        }
+    }
     // Update is called once per frame
      void Update()
     {

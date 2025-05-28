@@ -110,17 +110,18 @@
   }
   ,
   {
-    "name": "Red necklace",
+    "name": "Red Necklace",
     "sprite": 6,
 
     "trigger": {
-      "description": "When your take this relic increase healthly permanently",
-      "type": "one-time"
+      "description": "When a new wave starts",
+      "type": "wave-start",
     },
     "effect": {
-      "description": "Your max healthly will increase",
-      "type": "gain-healthly",
-      "amount": "10 wave 5 * +"
+      "description": "gain 25 additional spellpower for 10 seconds.",
+      "type": "gain-spellpower",
+      "amount": "25",
+      "until": "duration 15"
     }
   }
 

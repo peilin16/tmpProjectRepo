@@ -25,12 +25,12 @@ public class Relic
     }
     public virtual void StartLevel(PlayerController pc) {
         this.amount = RPNCalculator.EvaluateFloat(amount_exp, GameManager.Instance.currentWave);
-
     }
     public virtual IEnumerator RelicCoroutine (PlayerController pc)
     {
         yield break;
     }
+    public virtual void StartWave(PlayerController pc){ }
     public virtual void Update(PlayerController pc) { }
     public virtual void Application(PlayerController pc) { }
     public virtual void OnRemoved() { }
